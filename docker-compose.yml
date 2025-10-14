@@ -1,0 +1,28 @@
+# A simple Docker Compose file to set up a PostgreSQL container for our quiz API.
+#
+# To use this file:
+# 1. Make sure you have Docker and Docker Compose installed.
+# 2. Run `docker-compose up -d` in your terminal from the same directory as this file.
+#    The `-d` flag runs the container in detached mode (in the background).
+# 3. The PostgreSQL server will be available on localhost at port 5432.
+#
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: node-deno-bun-perf-postgres-1
+    environment:
+      POSTGRES_USER: quiz_user
+      POSTGRES_PASSWORD: quiz_password
+      POSTGRES_DB: quiz_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    # Command to start PostgreSQL with a higher connection limit
+    command: postgres -c 'max_connections=300'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U quiz_user -d quiz_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
