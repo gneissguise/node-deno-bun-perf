@@ -72,25 +72,50 @@ The script will start the database, run the benchmark for each runtime, and prin
 
 The benchmark results will be displayed in the console after running the `run_benchmark.sh` script. The results will show a comparison of the performance of Node.js, Deno, and Bun for each of the three tests.
 
-Here is an example of the output:
+Here is an example of the actual benchmark output:
 
 ```
 ================== BENCHMARK SUMMARY ==================
 
 Category: heavy_read
   Fastest -> Slowest (by requests/sec):
-    Rank   Server       Req/sec      Latency(ms)  Mem(KB)
-    1      bun          12345.67     1.23         123456
-    2      deno         10987.65     2.34         234567
-    3      node         9876.54      3.45         345678
+    Rank   Server       Req/sec      Latency(ms)  Mem(KB)   
+    1      node         1997.47      62.23        215924    
+    2      bun          1745.94      13.84        132812    
+    3      deno         977.2        126.76       165804    
 
   Least -> Most memory (by peak RSS KB):
     Rank   Server       Mem(KB)      Req/sec      Latency(ms)
-    1      bun          123456       12345.67     1.23
-    2      deno         234567       10987.65     2.34
-    3      node         345678       9876.54      3.45
+    1      bun          132812       1745.94      13.84     
+    2      deno         165804       977.2        126.76    
+    3      node         215924       1997.47      62.23     
 
-...
+Category: random_read
+  Fastest -> Slowest (by requests/sec):
+    Rank   Server       Req/sec      Latency(ms)  Mem(KB)   
+    1      bun          5569.47      3.99         126196    
+    2      node         4863.07      25.37        221924    
+    3      deno         2339.54      52.86        211056    
+
+  Least -> Most memory (by peak RSS KB):
+    Rank   Server       Mem(KB)      Req/sec      Latency(ms)
+    1      bun          126196       5569.47      3.99      
+    2      deno         211056       2339.54      52.86     
+    3      node         221924       4863.07      25.37     
+
+Category: random_write
+  Fastest -> Slowest (by requests/sec):
+    Rank   Server       Req/sec      Latency(ms)  Mem(KB)   
+    1      bun          3308.07      7.06         102588    
+    2      node         2941.54      41.97        228728    
+    3      deno         1776.87      69.82        212520    
+
+  Least -> Most memory (by peak RSS KB):
+    Rank   Server       Mem(KB)      Req/sec      Latency(ms)
+    1      bun          102588       3308.07      7.06      
+    2      deno         212520       1776.87      69.82     
+    3      node         228728       2941.54      41.97     
+=======================================================
 ```
 
 ## Contributing
